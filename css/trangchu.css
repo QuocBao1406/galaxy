@@ -1,0 +1,548 @@
+/* --- General Styles --- */
+:root {
+    /* Các biến CSS được giữ nguyên */
+    --primary-font: 'Poppins', sans-serif;
+    --heading-font: 'Exo 2', sans-serif;
+    --dark-bg: #0a192f;
+    --light-text: #ccd6f6;
+    --glow-color-1: #00ffff;
+    --glow-color-2: #ff00ff;
+    --glow-color-3: #ffffff;
+    --accent-color: #64ffda;
+    --card-bg: #112240;
+    --border-color: #233554;
+    --text-muted: #8892b0;
+    --link-hover-color: var(--accent-color);
+    --transition-fast: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-medium: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-slow: 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Reset và Base */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+    scroll-behavior: smooth; /* Thêm cuộn mượt */
+}
+
+body {
+    font-family: var(--primary-font);
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    line-height: 1.7;
+    font-size: 16px;
+    cursor: url('/galaxy/cursor.cur'), auto !important;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+    font-weight: 700;
+    color: #e6f1ff;
+    margin-bottom: 0.75em;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+    text-align: center; /* Mặc định căn giữa */
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+/* Left-aligned title variant */
+#intro-section .section-title {
+    text-align: left;
+}
+
+#intro-section .section-title::after {
+    left: 0;
+    transform: translateX(0);
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--link-hover-color);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block; /* Để padding và margin hoạt động đúng */
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    text-align: center;
+    white-space: nowrap; /* Ngăn chữ xuống dòng */
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent; /* Để tránh nhảy khi hover */
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--dark-bg);
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn-primary:hover {
+    background-color: #52d1bc;
+    border-color: #52d1bc;
+    color: var(--dark-bg);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Utilities */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Loại bỏ khoảng trắng dưới hình ảnh */
+}
+
+.mt-auto {
+    margin-top: auto !important;
+}
+
+.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px; /* Hoặc giá trị bạn muốn */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px; /* Để bù trừ cho padding của col */
+    padding-right: 15px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.col-md-6 {
+    width: 50%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+#hero-video-background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+}
+
+.hero-content {
+    position: absolute;
+    z-index: 3;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 3.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.cta-button {
+    background-color: var(--accent-color);
+    color: var(--dark-bg);
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    text-transform: uppercase;
+    cursor: url('/galaxy/cursor.cur'), auto !important;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
+}
+
+.cta-button:hover {
+    background-color: #52d1bc;
+    color: var(--dark-bg);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(100, 255, 218, 0.4);
+}
+
+/* Scroll Down Indicator */
+.scroll-down-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    opacity: 0.7;
+    width: 30px;
+    height: 50px;
+    border: 2px solid var(--glow-color-1);
+    border-radius: 15px;
+    display: inline-block;
+    transition: opacity var(--transition-fast), border-color var(--transition-fast);
+}
+
+.scroll-down-indicator::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 4px;
+    height: 10px;
+    background: var(--glow-color-1);
+    border-radius: 2px;
+    animation: scroll-anim 2s infinite;
+    transition: background-color var(--transition-fast);
+}
+
+.scroll-down-indicator:hover {
+    opacity: 1;
+    border-color: var(--glow-color-3);
+}
+
+.scroll-down-indicator:hover::before {
+    background: var(--glow-color-3);
+}
+
+@keyframes scroll-anim {
+    0% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(20px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* --- Featured Highlights Section --- */
+.featured-highlights-section {
+    background-color: var(--dark-bg);
+}
+
+.custom-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--light-text);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.custom-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.custom-card .card-title {
+    color: #e6f1ff;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem; /* Thêm khoảng cách */
+}
+
+.custom-card .card-text {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.custom-card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0.5rem 0.5rem 0 0; /* Bo góc trên */
+}
+
+/* --- Footer --- */
+.main-footer {
+    background-color: #061222; /* Even darker for footer */
+    color: var(--text-muted);
+    font-size: 0.9rem; /* ~14px */
+}
+.main-footer h5 {
+    color: var(--light-text);
+    font-size: 1.1rem; /* ~18px */
+    margin-bottom: 1rem;
+}
+.main-footer ul {
+    padding-left: 0;
+}
+.main-footer ul li a {
+    color: var(--text-muted);
+    transition: color 0.2s ease, padding-left 0.2s ease;
+}
+.main-footer ul li a:hover {
+    color: var(--accent-color);
+    padding-left: 5px;
+}
+.main-footer .social-icons a {
+    color: var(--text-muted);
+    font-size: 1.5rem; /* ~24px */
+    margin-right: 15px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+.main-footer .social-icons a:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+.main-footer hr {
+    border-color: var(--border-color);
+}
+
+
+/* --- Media Queries --- */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+    }
+
+    .col-md-6 {
+        width: 100%; /* Full width on small screens */
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+
+    .col-md-6 {
+        width: 50%; /* Back to half width */
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+/* === CSS CHO HIỆU ỨNG CUỘN === */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* === CSS CHO LƯỚI 3 THẺ ĐIỂM NHẤN === */
+.feature-card {
+    background: rgba(17, 34, 64, 0.7); /* Màu nền trong suốt hơn */
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    backdrop-filter: blur(5px); /* Hiệu ứng kính mờ */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1);
+    border-color: var(--glow-color-1);
+}
+
+.feature-card-icon {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+}
+
+/* Căn lề trái cho tiêu đề mục giới thiệu */
+#intro-section .section-title {
+    text-align: left;
+}
+#intro-section .section-title::after {
+    left: 0;
+    transform: none;
+}
+/* === CHI TIẾT MỚI 1: CÁC CON SỐ VŨ TRỤ === */
+.stats-section {
+    background-color: var(--card-bg);
+}
+.stat-item {
+    padding: 1rem;
+}
+.stat-icon {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+.stat-number {
+    font-size: 2.8rem;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    color: #fff;
+}
+.stat-label {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+/* === CHI TIẾT MỚI 2: TRÍCH DẪN CẢM HỨNG === */
+.quote-section {
+    padding: 6rem 0;
+    background-image: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)), url('https://images.pexels.com/photos/110854/pexels-photo-110854.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Hiệu ứng parallax đơn giản */
+}
+.inspirational-quote {
+    font-size: 2rem;
+    font-style: italic;
+    color: #fff;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    border-left: 4px solid var(--accent-color);
+    padding-left: 2rem;
+}
+.inspirational-quote footer {
+    font-size: 1.2rem;
+    font-style: normal;
+    color: var(--text-muted);
+    margin-top: 1rem;
+}
+/* === CHI TIẾT MỚI: RẠP CHIẾU PHIM VŨ TRỤ === */
+.video-showcase-section {
+    background: #112240; /* Nền tối sâu */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Lớp nền trang trí mờ ảo */
+.video-showcase-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/galaxy/images-icon/constellation-pattern.jpg');
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.video-showcase-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+.main-video-player {
+    border-radius: 15px;
+    overflow: hidden; /* Đảm bảo video cũng được bo góc */
+    box-shadow: 0 0 40px 5px rgba(0, 255, 255, 0.2);
+    border: 2px solid var(--glow-color-1);
+    background-color: #000;
+}
+
+.video-info {
+    max-width: 800px;
+    margin: 2rem auto;
+    text-align: center;
+    color: #fff;
+}
+.video-info h3 {
+    font-size: 2rem;
+    color: var(--accent-color);
+}
+.video-info p {
+    color: var(--text-muted);
+}
+
+
+
+/* Tùy chỉnh thanh cuộn cho đẹp hơn */
+.video-playlist::-webkit-scrollbar {
+    height: 8px;
+}
+.video-playlist::-webkit-scrollbar-track {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+.video-playlist::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 4px;
+}
+.video-playlist::-webkit-scrollbar-thumb:hover {
+    background: #fff;
+}
+

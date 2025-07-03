@@ -1,0 +1,382 @@
+/* in.css - CẬP NHẬT ĐỂ HEADER CÓ KÍCH THƯỚC CỐ ĐỊNH */
+
+/* (Tùy chọn) Reset cơ bản cho html, body nếu bạn chưa làm ở đâu khác */
+html, body {
+  margin: 0;
+  padding: 0;
+  
+  /* Nếu header cố định (ví dụ 1400px) rộng hơn màn hình,
+     thêm dòng này vào body để có thanh cuộn ngang cho toàn trang */
+  /* overflow-x: auto; */
+}
+
+#head {
+  top: 0;
+  /* === THIẾT LẬP KÍCH THƯỚC CỐ ĐỊNH CHO HEADER === */
+  width: 100%; /* <<<< QUAN TRỌNG: Đặt chiều rộng cố định bạn muốn (ví dụ: 1200px, 1400px, 1600px) */
+  height: 80px;  /* <<<< VÍ DỤ: Chiều cao cố định hoặc để 'auto' */
+
+  /* Tùy chọn: Để căn giữa header cố định này trên trang */
+  margin-left: auto;
+  margin-right: auto;
+
+  /* Các thuộc tính khác của bạn */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  border: 1px solid cyan;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: bold;
+  box-sizing: border-box;
+  /* position: relative; */
+  position: fixed;
+  z-index: 100000;
+     cursor: url('/galaxy/cursor.cur'), auto !important;
+}
+
+.logo-container {
+  position: relative;
+   background-image: url('/galaxy/images-icon/header.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  /* === KÍCH THƯỚC CỐ ĐỊNH CHO VÙNG LOGO === */
+  width: 460px;   /* <<<< VÍ DỤ: Chiều rộng cố định. Điều chỉnh. */
+  height: 100%;   /* Ví dụ: 100% chiều cao của #head (nếu #head có height cố định, ví dụ 70px) */
+  flex-shrink: 0; /* Ngăn vùng logo bị co lại */
+  line-height: 0;
+
+}
+
+
+
+.logo-overlay { /* logo3.png */
+  position: absolute;
+  pointer-events: none;
+  /* === VỊ TRÍ VÀ KÍCH THƯỚC CỐ ĐỊNH BẰNG PIXEL CHO LOGO TEAM === */
+  /* Điều chỉnh các giá trị pixel này cho chính xác! */
+  top: -25px;       /* <<<< VÍ DỤ */
+  left: 60px;     /* <<<< VÍ DỤ */
+  width: 160px;   /* <<<< VÍ DỤ */
+  height: auto;   /* Giữ tỷ lệ khung hình dựa trên width, HOẶC đặt height pixel cố định */
+  /* object-fit: contain; */ /* Nếu đặt cả width và height cố định cho overlay */
+}
+
+#menuhead {
+  padding-right: 20px; /* Điều chỉnh nếu cần */
+  display: flex;
+  align-items: center;
+  flex-shrink: 0; /* Đảm bảo menu không bị co lại một cách không mong muốn */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#menuhead nav ul li:last-child {
+  margin-right: 30px; /* hoặc 40px, tuỳ bạn */
+}
+
+#menuhead nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  /* --- QUAN TRỌNG: Ngăn các mục menu xuống dòng --- */
+  flex-wrap: nowrap;
+}
+
+#menuhead nav ul li {
+  margin-left: 50px; /* <<<< VÍ DỤ: Khoảng cách giữa các mục. Điều chỉnh. */
+  position: relative;
+  /* --- QUAN TRỌNG: Ngăn chữ trong mục menu xuống dòng --- */
+  white-space: nowrap;
+}
+
+#menuhead nav ul li:first-child {
+  margin-left: 0;
+}
+
+/* Các style khác cho icon menu, link, hover, active, dropdown giữ nguyên */
+#menuhead nav ul li > a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  cursor:  url('/galaxy/cursor.cur'), auto;
+  transition: all 0.3s ease;
+}
+
+#menuhead nav ul li a img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  margin-bottom: 5px;
+  transition: transform 0.3s ease;
+}
+
+/* ... (giữ lại các style cho dropdown-content, v.v. của bạn) ... */
+#menuhead a.active {
+  text-decoration: underline;
+  text-decoration-color: white;
+  text-underline-offset: 5px;        /* cách xuống dưới */
+  text-decoration-thickness: 5px;     /* độ dày gạch chân */
+}
+
+
+#menuhead nav ul li a:hover {
+  color: #00ffff;
+  cursor: url('/galaxy/cursor.cur'), auto !important;
+}
+
+#menuhead nav ul li a:hover img {
+  transform: scale(1.2);
+  
+}
+
+/* CSS cho dropdown menu */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgba(0,0,0,0.5);
+  min-width: 250px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1000;
+  padding: 10px 0;
+  border-radius: 5px;
+  top: 100%; 
+  left: 0%;
+  text-align: left;
+  
+}
+
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  transition: background-color 0.3s ease;
+  cursor:  url('/galaxy/cursor.cur'),  auto !important;
+}
+
+.dropdown-content a:hover {
+  color: black;
+}
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+/* === TOÀN BỘ CODE RESPONSIVE - DÁN VÀO CUỐI FILE in.css === */
+
+/* === TOÀN BỘ CODE RESPONSIVE - DÁN VÀO CUỐI FILE in.css === */
+/* Thêm đoạn này vào in.css, bên ngoài media query */
+#menu-toggle {
+  display: none; /* Mặc định ẩn nút này trên màn hình lớn */
+}
+
+@media (max-width: 992px) {
+
+    /* --- BƯỚC 1: Ép cho logo và header phải nhỏ lại --- */
+    #head {
+        width: 100% !important;
+        padding: 0 15px !important;
+        justify-content: space-between !important;
+    }
+
+    .logo-container {
+        width: 150px !important;    /* Có thể điều chỉnh lại độ rộng vùng logo nếu muốn */
+        height: 60px !important;
+        /* THÊM DÒNG NÀY ĐỂ ẨN VIỀN XANH */
+        background-image: none !important; 
+    }
+
+
+
+     .logo-overlay {
+        /* THAY THẾ TOÀN BỘ KHỐI CŨ BẰNG KHỐI NÀY ĐỂ HIỆN LẠI LOGO TEAM */
+        display: block !important;          /* 1. Hiện lại logo */
+        width: 120px !important;            /* 2. Đặt kích thước hợp lý cho logo */
+        height: auto !important;
+        position: absolute;
+        top: 50%;                           /* 3. Căn giữa theo chiều dọc */
+        left: 50%;                          /* 4. Căn giữa theo chiều ngang */
+        transform: translate(-50%, -50%);   /* 5. Tinh chỉnh để logo nằm ngay tâm */
+    }
+
+    /* --- BƯỚC 2: Ẩn menu desktop một cách triệt để --- */
+    #menuhead {
+        padding-right: 0 !important;
+    }
+
+    #menuhead nav ul#main-menu {
+        display: none !important;
+    }
+
+    /* --- BƯỚC 3: Ép nút 3 gạch phải hiện ra --- */
+    #menu-toggle {
+        display: block !important;
+    }
+
+    /* --- BƯỚC 4: Style cho menu dọc KHI ĐƯỢC MỞ (có class is-open) --- */
+    #menuhead nav ul#main-menu.is-open {
+        display: flex !important;
+        position: absolute;
+        top: 80px; /* Chiều cao header của bạn */
+        left: 0;
+        width: 100%;
+        background-color: black;
+        flex-direction: column;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+        padding-left: 0;
+    }
+
+    #menuhead nav ul#main-menu.is-open li {
+        width: 100%;
+        margin-left: 0;
+        text-align: left;
+        border-bottom: 1px solid #333;
+    }
+
+    #menuhead nav ul#main-menu.is-open li a {
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    #menuhead nav ul#main-menu.is-open li a img {
+        margin-right: 15px;
+        margin-bottom: 0;
+    }
+
+    
+/* Style cho menu con bên trong - MẶC ĐỊNH SẼ ẨN ĐI */
+#menuhead nav ul#main-menu.is-open .dropdown-content,
+#menuhead nav ul#main-menu.is-open .dropdown-content2 {
+    display: none; /* <<<< QUAN TRỌNG: Ẩn menu con theo mặc định */
+    position: static;
+    width: 100%;
+    background-color: #1a1a1a;
+    box-shadow: none;
+    border-radius: 0;
+    padding-left: 20px;
+}
+
+/* CHỈ HIỆN RA KHI MỤC CHA ĐƯỢC BẤM VÀO (có thêm class 'submenu-open') */
+#menuhead nav ul#main-menu.is-open .dropdown.submenu-open > .dropdown-content {
+    display: block !important;
+}
+}
+
+/* === CSS CHO CÔNG TẮC CHUYỂN NGÔN NGỮ === */
+
+/* Container chính để căn chỉnh */
+.language-switcher-container {
+    display: flex;
+    align-items: center;
+    margin-left: 30px; /* Khoảng cách với mục menu trước đó */
+}
+
+/* Ẩn checkbox mặc định đi */
+.lang-toggle-checkbox {
+    display: none;
+}
+
+/* Style cho phần "thanh trượt" của công tắc */
+.lang-toggle-label {
+    display: block;
+    position: relative;
+    width: 60px;  /* Chiều rộng công tắc */
+    height: 30px; /* Chiều cao công tắc */
+    background-color: #003865; /* Màu nền khi ở trạng thái VN */
+    border-radius: 15px;
+    cursor: url('/galaxy/cursor.cur'), auto !important;
+    transition: background-color 0.4s ease;
+}
+
+/* Style cho phần "nút tròn" trượt bên trong */
+.lang-toggle-switch {
+    display: block;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.4s ease;
+}
+
+/* Phần chứa hình ảnh 2 lá cờ */
+.lang-toggle-inner::before,
+.lang-toggle-inner::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: opacity 0.4s ease;
+}
+
+/* Icon cờ Việt Nam (bên trái) */
+.lang-toggle-inner::before {
+    background-image: url('/galaxy/images-icon/vi.png');
+    left: 5px;
+    opacity: 1; /* Mặc định hiện */
+}
+
+/* Icon cờ Anh (bên phải) */
+.lang-toggle-inner::after {
+    background-image: url('/galaxy/images-icon/en.png');
+    right: 5px;
+    opacity: 0.5; /* Mặc định mờ đi */
+}
+
+
+/* === HIỆU ỨNG KHI CÔNG TẮC ĐƯỢC BẬT (CHUYỂN SANG TIẾNG ANH) === */
+
+/* Khi checkbox được check (chuyển sang EN) */
+.lang-toggle-checkbox:checked + .lang-toggle-label {
+    background-color: #5078A6; /* Đổi màu nền sang màu xanh nhạt hơn */
+}
+
+/* Di chuyển nút tròn sang phải */
+.lang-toggle-checkbox:checked + .lang-toggle-label .lang-toggle-switch {
+    transform: translateX(30px);
+}
+
+/* Làm mờ cờ VN đi */
+.lang-toggle-checkbox:checked + .lang-toggle-label .lang-toggle-inner::before {
+    opacity: 0.5;
+}
+
+/* Làm rõ cờ EN lên */
+.lang-toggle-checkbox:checked + .lang-toggle-label .lang-toggle-inner::after {
+    opacity: 1;
+}
+
+#menu-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: url('/galaxy/cursor.cur'), auto !important;
+}
+

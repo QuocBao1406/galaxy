@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Vũ Trụ Demo Siêu Cấp</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #2c3e50; color: #ecf0f1; display: flex; justify-content: center; align-items: center; min-height: 95vh; }
+        #chat-container { width: 500px; background-color: #34495e; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.5); display: flex; flex-direction: column; height: 600px; }
+        #chat-header { background-color: #1abc9c; color: white; padding: 15px; text-align: center; font-size: 1.2em; border-top-left-radius: 8px; border-top-right-radius: 8px;}
+        #messages { flex-grow: 1; padding: 15px; overflow-y: auto; border-top: 1px solid #2c3e50; border-bottom: 1px solid #2c3e50;}
+        .message { margin-bottom: 12px; padding: 8px 12px; border-radius: 15px; line-height: 1.4; max-width: 75%; word-wrap: break-word; }
+        .user-message { background-color: #3498db; color: white; align-self: flex-end; margin-left: auto; border-bottom-right-radius: 5px;}
+        .bot-message { background-color: #95a5a6; color: #2c3e50; align-self: flex-start; border-bottom-left-radius: 5px;}
+        #input-area { display: flex; padding: 10px; border-top: 1px solid #2c3e50; background-color: #2c3e50; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;}
+        #userInput { flex-grow: 1; padding: 10px; border: none; border-radius: 20px; margin-right: 10px; background-color: #ecf0f1; color: #2c3e50;}
+        #sendButton { padding: 10px 15px; background-color: #1abc9c; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold;}
+        #sendButton:hover { background-color: #16a085; }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-header">Chatbot Vũ Trụ Demo</div>
+        <div id="messages">
+            <div class="message bot-message">Xin chào! Hãy hỏi tôi một điều gì đó về vũ trụ bao la nhé!</div>
+        </div>
+        <div id="input-area">
+            <input type="text" id="userInput" placeholder="Nhập câu hỏi của bạn ở đây...">
+            <button id="sendButton">Gửi</button>
+        </div>
+    </div>
+
+    <script>
+        const messagesDiv = document.getElementById('messages');
+        const userInput = document.getElementById('userInput');
+        const sendButton = document.getElementById('sendButton');
+
+        function addMessageToScreen(text, senderType) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', senderType === 'user' ? 'user-message' : 'bot-message');
+            messageElement.textContent = text;
+            messagesDiv.appendChild(messageElement);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight; // Cuộn xuống tin nhắn mới nhất
+        }
+
+        async function handleSendMessage() {
+            const userQuery = userInput.value.trim();
+            if (userQuery === "") return;
+
+            addMessageToScreen(userQuery, 'user');
+            userInput.value = ""; // Xóa nội dung ô nhập
+
+            try {
+                // Gửi câu hỏi lên backend (chạy ở port 5000 theo code Python bên dưới)
+                const response = await fetch('http://127.0.0.1:5000/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: userQuery }),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    addMessageToScreen(`Lỗi từ server: ${errorData.error || response.statusText}`, 'bot');
+                    return;
+                }
+
+                const data = await response.json();
+                addMessageToScreen(data.reply, 'bot');
+
+            } catch (error) {
+                console.error("Lỗi khi gửi tin nhắn:", error);
+                addMessageToScreen("Xin lỗi, tôi không thể kết nối đến máy chủ chatbot lúc này. Vui lòng thử lại sau.", 'bot');
+            }
+        }
+
+        sendButton.addEventListener('click', handleSendMessage);
+        userInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                handleSendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

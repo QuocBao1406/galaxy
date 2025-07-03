@@ -1,0 +1,159 @@
+/* ============================================================== */
+/* CSS TRANG TÀI KHOẢN - PHIÊN BẢN SỬA LỖI HIỂN THỊ TAB */
+/* ============================================================== */
+
+:root {
+    --font-main: 'Be Vietnam Pro', sans-serif;
+    --font-display: 'Lexend Deca', sans-serif;
+    --dash-bg: #0f172a;
+    --dash-glass-bg: rgba(30, 41, 59, 0.4);
+    --dash-glass-border: rgba(255, 255, 255, 0.1);
+    --dash-sidebar-bg: transparent;
+    --dash-text-primary: #f1f5f9;
+    --dash-text-secondary: #a7b3c4; /* <-- Làm màu chữ phụ sáng hơn một chút */
+    --dash-accent: #22d3ee;
+    --dash-success: #4ade80;
+    --dash-danger: #fb7185;
+    --dash-nav-active-bg: #e2e8f0;
+    --dash-nav-active-text: #0f172a;
+    --dash-nav-inactive-hover-bg: rgba(51, 65, 85, 0.5); /* <-- Thêm màu hover mới */
+}
+
+body {
+    background-color: var(--dash-bg) !important;
+    padding-top: 80px; 
+    font-family: var(--font-main);
+}
+
+.profile-dashboard-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2.5rem 1.5rem;
+    box-sizing: border-box;
+    min-height: calc(100vh - 80px);
+}
+
+.profile-dashboard {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    background: var(--dash-glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--dash-glass-border);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Cột trái - Sidebar */
+.dashboard-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    padding: 2rem;
+    border-right: 1px solid var(--dash-glass-border);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-user-info { text-align: center; margin-bottom: 2rem; }
+.sidebar-avatar-container { position: relative; width: 120px; height: 120px; margin: 0 auto 1rem; }
+#profile-avatar-img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 3px solid var(--dash-accent); }
+.avatar-edit-button { position: absolute; bottom: 5px; right: 5px; width: 32px; height: 32px; background-color: var(--dash-accent); color: var(--dash-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center;  cursor:  url('/galaxy/cursor.cur'),  auto !important;; transition: transform 0.2s ease; }
+.avatar-edit-button:hover { transform: scale(1.1); }
+#profile-fullname-display {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--dash-text-primary);
+    margin: 0;
+}
+#profile-username-value { color: var(--dash-text-secondary); font-size: 0.9rem; }
+
+/* --- THAY ĐỔI CHÍNH NẰM Ở ĐÂY --- */
+/* --- SỬA LỖI ĐỘ ƯU TIÊN CSS --- */
+/* Thêm class của thẻ cha (.dashboard-sidebar) vào trước mỗi quy tắc 
+   để tăng độ ưu tiên, đảm bảo nó sẽ thắng các quy tắc từ file in.css */
+
+.dashboard-sidebar .dashboard-nav { 
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+    flex-grow: 1; 
+}
+.dashboard-sidebar .dashboard-nav li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease;
+     cursor:  url('/galaxy/cursor.cur'),  auto !important;
+    border: 1px solid transparent;
+
+    /* Trạng thái không được chọn: Nền tối, chữ sáng vừa phải, dễ đọc */
+    background-color: transparent;
+    color: var(--dash-text-secondary);
+}
+.dashboard-sidebar .dashboard-nav li a:hover {
+    /* Khi di chuột qua mục không được chọn */
+    background-color: var(--dash-nav-inactive-hover-bg);
+    color: var(--dash-text-primary);
+}
+.dashboard-sidebar .dashboard-nav li a.active {
+    /* Trạng thái được chọn: Nền trắng, chữ đen */
+    background-color: var(--dash-nav-active-bg);
+    color: var(--dash-nav-active-text);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.dashboard-sidebar .dashboard-nav li a.active:hover {
+    /* Giữ nguyên màu khi đang active */
+    background-color: var(--dash-nav-active-bg);
+    color: var(--dash-nav-active-text);
+}
+.dashboard-sidebar .dashboard-nav li a i { 
+    width: 20px; 
+}
+.dashboard-nav li a.active:hover {
+    /* Giữ nguyên màu khi đang active */
+    background-color: var(--dash-nav-active-bg);
+    color: var(--dash-nav-active-text);
+}
+.dashboard-nav li a i { width: 20px; }
+/* --- KẾT THÚC THAY ĐỔI --- */
+
+#profile-logout-btn { width: 100%; padding: 12px; border: 1px solid var(--dash-danger); background-color: transparent; color: var(--dash-danger); border-radius: 8px;  cursor:  url('/galaxy/cursor.cur'),  auto !important;; font-weight: 600; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 8px; }
+#profile-logout-btn:hover { background-color: var(--dash-danger); color: #fff; }
+.dashboard-content-wrapper { flex-grow: 1; padding: 2.5rem; }
+.dashboard-content { display: none; }
+.dashboard-content.active { display: block; }
+.content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.content-header h2 { font-family: var(--font-display); color: var(--dash-text-primary); margin: 0; }
+.header-actions .action-btn-v2 { padding: 10px 20px; border: 1px solid var(--dash-accent); background-color: transparent; color: var(--dash-accent); border-radius: 8px;  cursor:  url('/galaxy/cursor.cur'),  auto !important;; font-weight: 600; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-left: 10px; }
+.header-actions .btn-edit:hover { background-color: var(--dash-accent); color: var(--dash-bg); }
+#change-password-form button, .header-actions .btn-save {
+    background-color: var(--dash-accent); /* Nền màu xanh cyan nổi bật */
+    color: #0f172a; /* Chữ màu tối để tương phản */
+    border: none; /* Bỏ viền cũ */
+    font-weight: 700; /* Chữ đậm hơn */
+    box-shadow: 0 4px 15px rgba(34, 211, 238, 0.2); /* Thêm hiệu ứng đổ bóng mờ */
+    transition: all 0.2s ease-in-out;
+}
+
+#change-password-form button:hover, .header-actions .btn-save:hover {
+    background-color: blue; 
+    color: white; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 20px rgba(34, 211, 238, 0.3);
+}
+.header-actions .btn-cancel { border-color: var(--dash-text-secondary); color: var(--dash-text-secondary); }
+.header-actions .btn-cancel:hover { background-color: var(--dash-text-secondary); color: #fff; }
+.info-grid-v2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+.info-item-v2 { background: var(--dash-sidebar-bg); padding: 1rem; border-radius: 8px; border: 1px solid var(--dash-glass-border); }
+.info-label-v2 { font-size: 0.8rem; color: var(--dash-text-secondary); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px; }
+.info-value-v2 { font-size: 1rem; color: var(--dash-text-primary); font-weight: 500; word-wrap: break-word; }
+.edit-input-v2 { width: 100%; padding: 8px 10px; background-color: rgba(15, 23, 42, 0.8); border: 1px solid var(--profile-border-color); color: var(--dash-text-primary); border-radius: 6px; font-size: 1rem; margin-top: 4px; }
+.edit-input-v2:focus { outline: none; border-color: var(--dash-accent); background-color: #0f172a; }
+@media (max-width: 992px) { .profile-dashboard { flex-direction: column; } .dashboard-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--dash-glass-border); } }

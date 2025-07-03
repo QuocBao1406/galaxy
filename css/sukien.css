@@ -1,0 +1,41 @@
+ body {
+            background-color: #0a0f1f;
+            color: #e0e0e0;
+            font-family: 'Roboto', sans-serif;
+        }
+        .page-header {
+            background: linear-gradient(rgba(10, 15, 31, 0.8), rgba(10, 15, 31, 0.8)), url('https://images.unsplash.com/photo-1454789548928-9efd52dc4031?q=80&w=2070') no-repeat center center;
+            background-size: cover;
+            padding: 6rem 0;
+            border-bottom: 3px solid #f59e0b; /* Màu cam cho sự kiện */
+        }
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(245, 158, 11, 0.8);
+        }
+        .search-form .form-control {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid #4a5568;
+            color: #fff;
+        }
+        .search-form .form-control::placeholder { color: #a0aec0; }
+        .search-form .btn { background-color: #f59e0b; border-color: #f59e0b; color: #1a202c; }
+
+        .event-card {
+            background-color: #1e293b;
+            border: 0;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .event-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        .event-card-img { height: 200px; object-fit: cover; }
+        .event-card .card-body { border-top: 3px solid #fbbf24; }
+        .event-card .card-title { color: #fef3c7; font-weight: 500; }
+        .event-card .card-text { color: #cbd5e1; }
+        .event-card .btn-custom { background-color: transparent; border: 1px solid #fbbf24; color: #fbbf24; }
+        .event-card .btn-custom:hover { background-color: #fbbf24; color: #1e293b; }

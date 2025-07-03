@@ -1,0 +1,60 @@
+ body { margin: 0;; overflow: hidden; font-family: Arial, sans-serif; }
+        canvas { display: block; }
+        #controls-container { position: absolute; top: 10px; left: 10px; z-index: 100; }
+        #playPauseButton {
+    /* Sử dụng font chữ chủ đề không gian mà bạn đã import */
+    font-family: 'Ẽo 2', sans-serif; 
+    font-size: 16px;
+    font-weight: bold;
+    color: #e0f7fa; /* Màu trắng xanh nhạt */
+    letter-spacing: 1px; /* Tăng khoảng cách chữ cho dễ đọc */
+
+    /* Nền màu xanh đen, hơi trong suốt để thấy background sao */
+    background-color: rgba(10, 30, 60, 0.75); 
+    border: 1px solid #00aaff; /* Viền màu xanh cyan */
+    border-radius: 8px; /* Bo góc mềm mại hơn */
+    padding: 10px 20px;
+    min-width: 90px;
+    cursor: pointer;
+    
+    /* Hiệu ứng đổ bóng tạo cảm giác "nổi" và phát sáng */
+    box-shadow: 0 0 8px rgba(0, 170, 255, 0.5), inset 0 0 5px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+
+    /* Hiệu ứng chuyển động mượt mà */
+    transition: all 0.3s ease-in-out;
+}
+
+#playPauseButton:hover {
+    background-color: rgba(20, 50, 90, 0.9); /* Nền đậm hơn khi hover */
+    color: #ffffff; /* Chữ trắng sáng hơn */
+    border-color: #99ddff; /* Viền sáng hơn */
+    
+    /* Tăng hiệu ứng phát sáng khi hover */
+    box-shadow: 0 0 15px rgba(0, 170, 255, 0.8), inset 0 0 8px rgba(0, 0, 0, 0.5);
+}
+        #controls-info { position: absolute; top: 50px; width: 100%; text-align: center; color: white; font-size: 14px; z-index: 10; }
+        #object-info-box {
+            position: absolute;
+            top: 80px;
+            left: 10px;
+            padding: 12px;
+            background-color: rgba(25, 25, 50, 0.92); /* Nền đậm hơn chút */
+            color: white;
+            border-radius: 8px;
+            display: none;
+            width: 280px; /* Tăng chiều rộng để chứa iframe */
+            max-width: 90vw;
+            border: 1px solid #6677aa;
+            z-index: 10;
+            font-size: 13px;
+        }
+        #object-info-box h3 { margin-top: 0; margin-bottom: 8px; color: #ffa500; }
+        #object-info-box p { margin-bottom: 5px; }
+        #object-info-box strong { color: #99ccff; }
+        #object-info-box iframe {
+            width: 100%; /* Iframe sẽ chiếm toàn bộ chiều rộng của info-box */
+            height: 200px; /* Chiều cao cố định cho iframe, bạn có thể điều chỉnh */
+            border: 1px solid #445588; /* Viền cho iframe */
+            margin-top: 8px;
+        }
