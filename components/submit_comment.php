@@ -8,7 +8,7 @@ header('Content-Type: application/json');
 function generate_comment_html($comment_id, $conn, $post_id, $loggedIn) {
     // SỬA LẠI CÂU SQL: Thêm "u.is_verified" để lấy trạng thái tích xanh
     $sql = "SELECT c.*, u.username, u.avatar, u.is_verified 
-            FROM comments c 
+            FROM group_comments c 
             JOIN users u ON c.user_id = u.id 
             WHERE c.id = ?";
     $stmt = $conn->prepare($sql);
@@ -43,7 +43,7 @@ function generate_comment_html($comment_id, $conn, $post_id, $loggedIn) {
                 
                 <?php
                 // Phần hiển thị media giữ nguyên
-                $stmt_media = $conn->prepare("SELECT file_path, media_type FROM comment_media WHERE comment_id = ?");
+                $stmt_media = $conn->prepare("SELECT file_path, media_type FROM group_comment_media WHERE comment_id = ?");
                 $stmt_media->bind_param("i", $comment['id']);
                 $stmt_media->execute();
                 $result_media = $stmt_media->get_result();
@@ -107,7 +107,7 @@ if (empty($content) && !$has_files) {
 }
 $conn->begin_transaction();
 try {
-    $stmt_comment = $conn->prepare("INSERT INTO comments (post_id, user_id, parent_id, content) VALUES (?, ?, ?, ?)");
+    $stmt_comment = $conn->prepare("INSERT INTO group_comments (post_id, user_id, parent_id, content) VALUES (?, ?, ?, ?)");
     $stmt_comment->bind_param("iiis", $post_id, $user_id, $parent_id, $content);
     $stmt_comment->execute();
     $comment_id = $conn->insert_id;
@@ -129,7 +129,7 @@ try {
                     $destination_path = $upload_dir . $new_file_name;
                     if (move_uploaded_file($file_tmp_path, $destination_path)) {
                         $file_path_db = '/galaxy/uploads/comments/' . $new_file_name;
-                        $stmt_media = $conn->prepare("INSERT INTO comment_media (comment_id, file_path, media_type) VALUES (?, ?, ?)");
+                        $stmt_media = $conn->prepare("INSERT INTO group_comment_media (comment_id, file_path, media_type) VALUES (?, ?, ?)");
                         $stmt_media->bind_param("iss", $comment_id, $file_path_db, $media_type);
                         $stmt_media->execute();
                         $stmt_media->close();

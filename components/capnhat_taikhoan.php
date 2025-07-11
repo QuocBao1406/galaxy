@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('db.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/galaxy/db.php');
 
 header('Content-Type: application/json');
 

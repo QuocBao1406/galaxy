@@ -280,6 +280,21 @@ $loggedIn = isset($_SESSION['username']);
             }
         ?>
     </main>
+
+    <main class="sun-content-section">
+        <?php
+            // 1. Xác định đường dẫn đến tệp nội dung dựa trên ngôn ngữ hiện tại
+            $content_file = $_SERVER['DOCUMENT_ROOT'] . "/galaxy/content/footer_{$current_lang}.html";
+
+            // 2. Kiểm tra tệp có tồn tại không và đọc toàn bộ nội dung của nó
+            if (file_exists($content_file)) {
+                echo file_get_contents($content_file);
+            } else {
+                echo "Nội dung không có sẵn cho ngôn ngữ này.";
+            }
+        ?>
+    </main>
+    
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- <script src="script.js"></script> -->
 <script src="/galaxy/js/allhemattroi.js"></script>

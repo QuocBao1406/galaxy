@@ -38,4 +38,137 @@
         .news-card .card-title { color: #f0f9ff; font-weight: 500; }
         .news-card .card-text { color: #cbd5e1; }
         .news-card .btn-custom { background-color: transparent; border: 1px solid #38bdf8; color: #38bdf8; }
-        .news-card .btn-custom:hover { background-color: #38bdf8; color: #fff; }
+          .news-card .btn-custom:hover { background-color: #38bdf8; color: #fff; }
+
+        /* Thêm vào file /galaxy/css/tintuc.css */
+
+/* --- Tiêu đề cho các khu vực --- */
+.section-title {
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #00aaff;
+    display: inline-block;
+}
+
+
+/* --- CSS cho Slider Tin Nổi Bật --- */
+.slider-card {
+    border: none;
+    height: 450px; /* Điều chỉnh chiều cao slider theo ý muốn */
+    background-color: #333;
+    overflow: hidden;
+}
+
+.slider-card .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Đảm bảo ảnh luôn vừa vặn */
+    transition: transform 0.5s ease;
+}
+
+.slider-card:hover .card-img {
+    transform: scale(1.1); /* Hiệu ứng zoom ảnh khi hover */
+}
+
+.slider-card .card-img-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+    padding: 1.5rem;
+}
+
+.slider-card .card-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.75rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+a.slider-card-link {
+    text-decoration: none;
+}
+
+.swiper-container {
+  width: 100%;
+  height: 500px;
+  overflow: hidden; /* 👈 Rất quan trọng: ẩn phần dư */
+}
+
+.swiper-slide {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.swiper-pagination-bullet-active {
+    background: #00aaff !important;
+}
+
+.slider-wrapper {
+  position: relative;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  color: white;
+}
+
+.swiper-button-prev {
+  left: 10px;
+}
+
+.swiper-button-next {
+  right: 10px;
+}
+
+.swiper-pagination {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+}
+
+/* --- CSS cho Hiệu ứng Hover trên Card Tin Tức Thường --- */
+.news-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 170, 255, 0.2);
+}
+
+/* Chỉnh ảnh trong tin tức mới nhất và nhiều lượt xem */
+        .news-thumbnail {
+        width: 80px;
+        height: 60px;
+        object-fit: cover;
+        border: 1px solid #ddd;
+        box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+        }
+
+        .news-thumbnail:hover {
+            transform: scale(1.05);
+        }
+
+        /* chỉnh màu và hover cho thẻ các thẻ tin tức đặc biệt */
+        .news-link {
+            color: #c4b8b8; /* Màu chữ ban đầu */
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .news-link:hover {
+            color: #46a3e0; /* Màu khi hover (đỏ đẹp) */
+            text-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .luotxem .ngaydang {
+            color:#ddd;
+        }

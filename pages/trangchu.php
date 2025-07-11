@@ -26,16 +26,16 @@ $loggedIn = isset($_SESSION['username']);
 
 <body>
    
-  <header id="head">
-    <div class="logo-container">
-        <img src="/galaxy/images-icon/logo3.png" alt="logonhom" class="logo-overlay">
-    </div>
+    <header id="head">
+        <div class="logo-container">
+            <img src="/galaxy/images-icon/logo3.png" alt="logonhom" class="logo-overlay">
+        </div>
         <div id="menuhead">
             <?php include $_SERVER['DOCUMENT_ROOT'] . '/galaxy/components/nav.php'; ?>
         </div>
     </header>
 
-     <main class="sun-content-section">
+    <main class="sun-content-section">
         <?php
             // 1. Xác định đường dẫn đến tệp nội dung dựa trên ngôn ngữ hiện tại
             $content_file = $_SERVER['DOCUMENT_ROOT'] . "/galaxy/content/trangchu_{$current_lang}.html";

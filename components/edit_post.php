@@ -12,10 +12,21 @@
 
     // 2. Lấy thông tin bài viết và media
     $post_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+    $isGroupPost = isset($_GET['group']);
     if ($post_id === 0) { die("ID bài viết không hợp lệ."); }
 
+    $postTableName ="";
+    $postMediaTableName="";
+    if($isGroupPost){
+        $postTableName = "group_posts";
+        $postMediaTableName = "post_group_media";
+    }else{
+        $postTableName = "posts";
+        $postMediaTableName = "post_media";
+    }
+
     // Lấy thông tin post
-    $stmt_post = $conn->prepare("SELECT * FROM posts WHERE id = ?");
+    $stmt_post = $conn->prepare("SELECT * FROM $postTableName WHERE id = ?");
     $stmt_post->bind_param("i", $post_id);
     $stmt_post->execute();
     $result_post = $stmt_post->get_result();
@@ -29,7 +40,7 @@
     }
 
     // Lấy media hiện có của post
-    $stmt_media = $conn->prepare("SELECT id, file_path, media_type FROM post_media WHERE post_id = ?");
+    $stmt_media = $conn->prepare("SELECT id, file_path, media_type FROM $postMediaTableName WHERE post_id = ?");
     $stmt_media->bind_param("i", $post_id);
     $stmt_media->execute();
     $current_media = $stmt_media->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -84,6 +95,7 @@
     <li class="dropdown">
         <a href="#"><img src="/galaxy/images-icon/black-hole.png" alt=""><?= t('3') ?></a>
         <div class="dropdown-content">
+             <a class="item" href="vutru.php"><img src="/galaxy/images-icon/vutru.png" alt=""><?= t('3,3') ?> </a>
             <a class="item" href="sukien.php"><img src="/galaxy/images-icon/sukien.png" alt=""><?= t('3,1') ?> </a>
             <a class="item" href="tintuc.php"><img src="/galaxy/images-icon/news.png" alt=""><?= t('3,2') ?> </a>
         </div>
@@ -119,7 +131,7 @@
         <main class="container">
             <h1 class="mb-4 text-white"><?= t('edit-congdong-1') ?></h1>
             <div class="edit-form-container">
-                <form action="update_post.php" method="POST" enctype="multipart/form-data">
+                <form action="update_post.php?group=<?= $isGroupPost ? 'true' : ""  ?>" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
 
                     <div class="mb-3">

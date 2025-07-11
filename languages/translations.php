@@ -62,6 +62,10 @@ $translations = [
         'vi' => 'TIN TỨC',
         'en' => 'NEWS'
     ],
+    '3,3' => [
+        'vi' => 'KIẾN THỨC',
+        'en' => 'KNOWLEDGE'
+    ],
     '4' => [
         'vi' => 'CỘNG ĐỒNG',
         'en' => 'COMMUNITY'
@@ -114,6 +118,10 @@ $translations = [
         'en' => 'Time'
     ],
     //tintuc
+    'tintuc' => [
+        'vi' => 'Tin Tức',
+        'en' => 'News'
+    ],
     'tintuc-1' => [
         'vi' => 'Nhập từ khóa để tìm kiếm tin tức...',
         'en' => 'Enter keywords to search for news...'
@@ -141,6 +149,10 @@ $translations = [
      'tintuc-7' => [
         'vi' => 'Thời giam',
         'en' => 'Time'
+    ],
+    'tag-categoty' => [
+        'vi' => '🏷️ Các danh mục ',
+        'en' => '🏷️ Categories'
     ],
 
     //congdong
@@ -301,6 +313,34 @@ $translations = [
      'taikhoan-14' => [
         'vi' => 'Bạn có chắc chắn muốn đăng xuất?',
         'en' => 'Are you sure you want to log out?'
+    ],
+    'tintuc-tin-noi-bat' => [
+        'vi' => 'Tin Nổi Bật',
+        'en' => 'Featured News'
+    ],
+    'tintuc-tin-khac' => [
+        'vi' => 'Các Tin Tức Khác',
+        'en' => 'Other News'
+    ],
+    'tintuc-ngay' => [
+        'vi' => 'Tin tức ngày ',
+        'en' => 'News ',
+    ],
+     'tintuc-tin-nhieuviews' => [
+        'vi' => '🔥 Tin nhiều lượt xem ',
+        'en' => '🔥 Most viewed news ',
+    ],
+      'tintuc-tin-moi' => [
+        'vi' => '🕒 Tin mới nhất ',
+        'en' => '🕒 Latest News ',
+    ],
+      'tintuc-chonngay' => [
+        'vi' => '📅 Lọc theo ngày ',
+        'en' => '📅 Filter by date ',
+    ],
+     'tintuc-xem-them-theo-chuyen-muc' => [
+        'vi' => 'Xem thêm',
+        'en' => 'See more ',
     ],
 ];
 ?>

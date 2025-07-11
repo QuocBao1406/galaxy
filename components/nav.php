@@ -49,15 +49,18 @@
             <div class="dropdown-content">
                 <a class="item" href="/galaxy/pages/sukien.php"><img src="/galaxy/images-icon/sukien.png" alt=""><?= t('3,1') ?></a>
                 <a class="item" href="/galaxy/pages/tintuc.php"><img src="/galaxy/images-icon/news.png" alt=""><?= t('3,2') ?></a>
+                <a class="item" href="/galaxy/pages/vutru.php"><img src="/galaxy/images-icon/black-hole.png" alt=""><?= t('3,3') ?></a>
             </div>
         </li>
 
         <li>
-            <a href="/galaxy/pages/congdong.php" class="<?= $currentPage == 'congdong.php' ? 'active' : ''; ?>"><img src="/galaxy/images-icon/group.png" alt=""><?= t('4') ?></a>
+            <a href="<?= $loggedIn ? '/galaxy/pages/congdong.php' : '/galaxy/TAIKHOAN/login-register.php'; ?>" class="<?= $currentPage == 'congdong.php' ? 'active' : ''; ?>">
+                <img src="/galaxy/images-icon/group.png" alt=""><?= t('4') ?>
+            </a>
         </li>
 
         <li>
-            <a href="<?= $loggedIn ? 'taikhoan.php' : './TAIKHOAN/login-register.html'; ?>" class="<?= $currentPage == 'taikhoan.php' ? 'active' : ''; ?>">
+            <a href="<?= $loggedIn ? '/galaxy/pages/taikhoan.php' : '/galaxy/TAIKHOAN/login-register.php'; ?>" class="<?= $currentPage == 'taikhoan.php' ? 'active' : ''; ?>">
                 <img src="/galaxy/images-icon/dangnhap.png" alt=""><?= t('5') ?>
             </a>
         </li>

@@ -102,7 +102,7 @@ $result = $stmt->get_result();
                             <strong><?= t('sukien-4') ?></strong> <?= date("d/m/Y", strtotime($row['event_date'])) ?>
                         </p>
                         <!-- <p class="card-text flex-grow-1"><?= htmlspecialchars(substr($row['content'], 0, 120)) ?>...</p>   -->
-                        <a href="view_event.php?id=<?= $row['id'] ?>" class="btn btn-custom mt-auto align-self-start"><?= t('sukien-5') ?></a>
+                        <a href="/galaxy/components/view_event.php?id=<?= $row['id'] ?>" class="btn btn-custom mt-auto align-self-start"><?= t('sukien-5') ?></a>
                     </div>
                 </div>
             </div>
@@ -116,8 +116,21 @@ $result = $stmt->get_result();
             <?php endif; $stmt->close(); ?>
         </div>
     </main>
-     <script src="/galaxy/js/sukien.js"></script>
-    
 
+    <main class="sun-content-section">
+        <?php
+            // 1. Xác định đường dẫn đến tệp nội dung dựa trên ngôn ngữ hiện tại
+            $content_file = $_SERVER['DOCUMENT_ROOT'] . "/galaxy/content/footer_{$current_lang}.html";
+
+            // 2. Kiểm tra tệp có tồn tại không và đọc toàn bộ nội dung của nó
+            if (file_exists($content_file)) {
+                echo file_get_contents($content_file);
+            } else {
+                echo "Nội dung không có sẵn cho ngôn ngữ này.";
+            }
+        ?>
+    </main>
+
+     <script src="/galaxy/js/sukien.js"></script>
 </body>
 </html>

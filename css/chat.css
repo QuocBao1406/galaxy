@@ -1,0 +1,226 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.chat-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* --- Cột bên trái (Danh sách cuộc trò chuyện) --- */
+.sidebar-left {
+    width: 300px;
+    border-right: 1px solid #dee2e6;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+.sidebar-left-header {
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+    font-weight: bold;
+}
+.conversations-list {
+    overflow-y: auto;
+    flex-grow: 1;
+}
+.conversation-item a {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #f1f1f1;
+    transition: background-color 0.2s;
+}
+.conversation-item a:hover {
+    background-color: #f8f9fa;
+}
+.conversation-item.active a {
+    background-color: #e9ecef;
+}
+.conversation-info {
+    margin-left: 10px;
+    flex-grow: 1;
+    overflow: hidden;
+}
+.conversation-info .username {
+    font-weight: 600;
+    display: block;
+}
+.conversation-info .last-message {
+    font-size: 0.85rem;
+    color: #6c757d;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* --- Khung Chat chính --- */
+.chat-box {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f5f5;
+}
+.chat-header {
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+    background-color: #fff;
+    font-weight: bold;
+}
+.messages-area {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem;
+}
+.message {
+    display: flex;
+    margin-bottom: 1rem;
+    max-width: 75%;
+}
+.message-content {
+    padding: 0.6rem 1rem;
+    border-radius: 18px;
+    word-wrap: break-word;
+}
+.message.sent {
+    margin-left: auto;
+    flex-direction: row-reverse;
+}
+.message.sent .message-content {
+    background-color: #0d6efd;
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+.message.received {
+    margin-right: auto;
+}
+.message.received .message-content {
+    background-color: #fff;
+    border: 1px solid #e9ecef;
+    border-bottom-left-radius: 4px;
+}
+.message-image {
+    max-width: 250px;
+    border-radius: 15px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.message-form {
+    padding: 1rem;
+    border-top: 1px solid #dee2e6;
+    background-color: #fff;
+}
+.placeholder-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #6c757d;
+}
+
+/* --- Cột bên phải (Thông tin) --- */
+.sidebar-right {
+    width: 280px;
+    border-left: 1px solid #dee2e6;
+    background-color: #fff;
+    overflow-y: auto;
+    padding: 1rem;
+    text-align: center;
+}
+.partner-info img {
+    width: 80px;
+    height: 80px;
+}
+.partner-info .username {
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+.shared-media h6 {
+    text-align: left;
+    margin-top: 1.5rem;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 0.5rem;
+}
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 1rem;
+}
+.media-grid img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+}
+/* Thêm vào cuối file style.css */
+
+/* --- Tinh chỉnh cho nút quay lại --- */
+.sidebar-left-header a {
+    color: #6c757d;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.sidebar-left-header a:hover {
+    color: #000;
+}
+
+/* --- Tinh chỉnh cho vùng thông tin partner có thể click --- */
+.partner-info a {
+    color: inherit;
+    text-decoration: none;
+}
+.partner-info a:hover {
+    opacity: 0.9;
+}
+
+
+/* --- CSS cho Lightbox phóng to ảnh --- */
+.lightbox {
+    /* Mặc định ẩn đi */
+    display: none; 
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    /* Dùng flexbox để căn giữa ảnh */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    display: block;
+    object-fit: contain;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.lightbox-close:hover {
+    color: #ccc;
+}

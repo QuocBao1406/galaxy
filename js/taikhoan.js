@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
             reader.readAsDataURL(file);
             const formData = new FormData();
             formData.append('avatar', file);
-            fetch(webRootPrefix + '/update_avatar.php', { method: 'POST', body: formData })
+            fetch(webRootPrefix + '/components/update_avatar.php', { method: 'POST', body: formData })
             .then(response => response.ok ? response.json() : response.text().then(text => Promise.reject(new Error(text))))
             .then(data => {
                 if (data.success && data.newAvatarUrl) {
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             if (!isValid) return;
 
-            fetch(webRootPrefix + '/capnhat_taikhoan.php', {
+            fetch(webRootPrefix + '/components/capnhat_taikhoan.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatedUserData)
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (logoutButton) {
     logoutButton.addEventListener("click", function() {
         if (confirm(logoutMessage)) {
-            window.location.href = webRootPrefix + "/logout.php";
+            window.location.href = "/galaxy/components/logout.php";
         }
     });
 }
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             const formData = new FormData(this);
             const data = Object.fromEntries(formData.entries());
-            fetch('change_password.php', {
+            fetch('/galaxy/components/change_password.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)

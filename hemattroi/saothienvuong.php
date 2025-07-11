@@ -257,54 +257,8 @@ $loggedIn = isset($_SESSION['username']);
     <img src="/galaxy/images-icon/logo3.png" alt="logonhom" class="logo-overlay">
 </div>
        <div id="menuhead">
-        
-        <nav>
-           <button id="menu-toggle" aria-label="Mở menu">☰</button>
-
-        <ul id="main-menu">
-                <li><a href="/galaxy/trangchu.php"><img src="/galaxy/images-icon/home.png" alt=""><?= t('1') ?></a></li>
-
-                <li class="dropdown">
-                    <a href="#" class="active"><img src="/galaxy/images-icon/hemattroi.png"   alt=""><?= t('2') ?></a>
-                    <div class="dropdown-content">
-                        <a class="item" href="mattroi.php"><img src="/galaxy/images-icon/sun.png" alt=""><?= t('2,1') ?></a>
-                        <a class="item" href="saothuy.php"><img src="/galaxy/images-icon/mercury.png" alt=""><?= t('2,2') ?></a>
-                        <a class="item" href="saokim.php"><img src="/galaxy/images-icon/venus.png" alt=""><?= t('2,3') ?></a>
-                        <a class="item" href="traidat.php"><img src="/galaxy/images-icon/earth.png" alt=""><?= t('2,4') ?></a>
-                        <a class="item" href="mattrang.php"><img src="/galaxy/images-icon/full-moon.png" alt=""><?= t('2,5') ?> </a>
-                        <a class="item" href="saohoa.php"><img src="/galaxy/images-icon/mars.png" alt=""><?= t('2,6') ?></a>
-                        <a class="item" href="saomoc.php"><img src="/galaxy/images-icon/jupiter.png" alt=""><?= t('2,7') ?></a>
-                        <a class="item" href="saotho.php"><img src="/galaxy/images-icon/saturn.png" alt=""><?= t('2,8') ?></a>
-                        <a class="item" href="saothienvuong.php"><img src="/galaxy/images-icon/uranus.png" alt=""><?= t('2,9') ?></a>
-                        <a class="item" href="saohaivuong.php"><img src="/galaxy/images-icon/neptune.png" alt=""><?= t('2,10') ?></a>
-                    </div>
-                </li>
-                <li class="dropdown"><a href="#"><img src="/galaxy/images-icon/black-hole.png" alt=""><?= t('3') ?></a>
-                    <div class="dropdown-content">
-                        <a class="item" href="/galaxy/sukien.php"><img src="/galaxy/images-icon/sukien.png" alt=""><?= t('3,1') ?> </a>
-                        <a class="item" href="/galaxy/tintuc.php"><img src="/galaxy/images-icon/news.png" alt=""><?= t('3,2') ?>
-                 <li ><a href="/galaxy/congdong.php"><img src="/galaxy/images-icon/group (1).png" alt=""><?= t('4') ?></a>  </li>
-               <li>
-  <a href="<?php echo $loggedIn ? '/galaxy/taikhoan.php' : '/galaxy/TAIKHOAN/login-register.html'; ?>">
-    <img src="/galaxy/images-icon/dangnhap.png" alt=""><?= t('5') ?>
-  </a>
-</li>
-                <li class="dropdown"><a href="#"><img src="/galaxy/images-icon/more.png" alt=""><?= t('6') ?></a>
-                     <div class="dropdown-content" style="left: -170%">
-                        <a class="item" href="/galaxy/vechungtoi.php"><img src="/galaxy/images-icon/group.png" alt=""><?= t('6,1') ?></a>
-                        <a class="language-switcher-container">
-        <input type="checkbox" id="lang-toggle" class="lang-toggle-checkbox"
-               <?php if(isset($current_lang)) echo ($current_lang == 'en') ? 'checked' : ''; ?>
-        >
-        <label for="lang-toggle" class="lang-toggle-label">
-            <span class="lang-toggle-inner"></span>
-            <span class="lang-toggle-switch"></span>
-        </label>
-             </a>
-                     </div>
-                </li> 
-            </ul>
-        </nav></div>
+            <?php include $_SERVER['DOCUMENT_ROOT'] . '/galaxy/components/nav.php'; ?>
+        </div>
     </header>
 <main class="sun-content-section">
         <?php
@@ -319,6 +273,21 @@ $loggedIn = isset($_SESSION['username']);
             }
         ?>
     </main>
+
+    <main class="sun-content-section">
+        <?php
+            // 1. Xác định đường dẫn đến tệp nội dung dựa trên ngôn ngữ hiện tại
+            $content_file = $_SERVER['DOCUMENT_ROOT'] . "/galaxy/content/footer_{$current_lang}.html";
+
+            // 2. Kiểm tra tệp có tồn tại không và đọc toàn bộ nội dung của nó
+            if (file_exists($content_file)) {
+                echo file_get_contents($content_file);
+            } else {
+                echo "Nội dung không có sẵn cho ngôn ngữ này.";
+            }
+        ?>
+    </main>
+    
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- <script src="script.js"></script> -->
 <script src="/galaxy/js/allhemattroi.js"></script>

@@ -3,8 +3,8 @@ session_start();
 // --- BẮT ĐẦU SỬA ĐỔI ---
 
 // 1. Thêm 2 dòng này để tích hợp hệ thống dịch và kết nối DB
-require_once $_SERVER['DOCUMENT_ROOT'] . '/galaxy/lang.php';
-require_once 'db.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/galaxy/languages/lang.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/galaxy/db.php';
 
 $event_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 if ($event_id === 0) die("Sự kiện không hợp lệ.");
@@ -40,18 +40,27 @@ $event = $result->fetch_assoc();
         .article-content { font-size: 1.1rem; line-height: 1.9; color: #cbd5e1; }
         .article-content img { max-width: 100%; height: auto; border-radius: 0.5rem; margin: 25px 0; }
         .article-content h2, .article-content h3 { font-family: 'Merriweather', serif; color: #fbbf24; margin-top: 2rem; }
-        .back-link { color: #f59e0b; text-decoration: none; font-weight: bold; }
+        .back-link { color: #f59e0b; text-decoration: none; font-weight: bold; margin: 0px; }
         .back-link:hover { color: #fef3c7; }
         .event-date-badge { font-size: 1.1rem; }
     </style>
+    <link rel="stylesheet" href="/galaxy/css/header.css">
 </head>
 <body>
-    <?php // Include header chung ?>
+    <header id="head">
+    <div class="logo-container">
+        <img src="/galaxy/images-icon/logo3.png" alt="logonhom" class="logo-overlay">
+    </div>
+        <div id="menuhead">
+            <?php include $_SERVER['DOCUMENT_ROOT'] . '/galaxy/components/nav.php'; ?>
+        </div>
+    </header>
+
     <main class="container my-5">
         <div class="row justify-content-center">
-            <div class="col-lg-9">
+            <div class="col-lg-9" style="margin-top: 5vh; font-size: 1.3rem;">
                 <div class="mb-4">
-                    <a href="sukien.php" class="back-link">&laquo; <?= t('sukien-7') ?></a>
+                    <a href="/galaxy/pages/sukien.php" class="back-link">&laquo; <?= t('sukien-7') ?></a>
                 </div>
                 
                 <article>

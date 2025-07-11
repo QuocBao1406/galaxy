@@ -69,7 +69,7 @@ try {
     }
 
     $conn->commit();
-    header("Location: congdong.php");
+    header("Location: /galaxy/pages/congdong.php");
     exit();
 
 } catch (Exception $e) {

@@ -1,5 +1,5 @@
 <?php
-require_once '../db.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/galaxy/db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $token = $_POST['token'];
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if ($update_stmt->execute()) {
             echo "Cập nhật mật khẩu thành công! Bạn có thể đăng nhập ngay bây giờ.";
-            echo "<br><a href='login-register.html'>Tới trang Đăng nhập</a>";
+            echo "<br><a href='login-register.php'>Tới trang Đăng nhập</a>";
         } else {
             echo "Đã có lỗi xảy ra. Vui lòng thử lại.";
         }

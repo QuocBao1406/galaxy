@@ -11,6 +11,7 @@ if (isset($_POST['save_news'])) {
     $category_en = $_POST['category_en'];
     $excerpt_en = $_POST['excerpt_en'];
     $full_content_en = $_POST['full_content_en'];
+    $is_featured = isset($_POST['is_featured']) ? 1 : 0;
 
     // Trường chung
     $image_url = $_POST['current_image'] ?? ''; 
@@ -29,11 +30,11 @@ if (isset($_POST['save_news'])) {
 
     if (isset($_POST['id'])) { // SỬA
         $id = (int)$_POST['id'];
-        $stmt = $conn->prepare("UPDATE news SET title_vi=?, category_vi=?, excerpt_vi=?, full_content_vi=?, title_en=?, category_en=?, excerpt_en=?, full_content_en=?, image_url=? WHERE id=?");
-        $stmt->bind_param("sssssssssi", $title_vi, $category_vi, $excerpt_vi, $full_content_vi, $title_en, $category_en, $excerpt_en, $full_content_en, $image_url, $id);
+        $stmt = $conn->prepare("UPDATE news SET title_vi=?, category_vi=?, excerpt_vi=?, full_content_vi=?, title_en=?, category_en=?, excerpt_en=?, full_content_en=?, image_url=?, is_featured=? WHERE id=?");
+        $stmt->bind_param("ssssssssssi", $title_vi, $category_vi, $excerpt_vi, $full_content_vi, $title_en, $category_en, $excerpt_en, $full_content_en, $image_url, $is_featured, $id);
     } else { // THÊM
-        $stmt = $conn->prepare("INSERT INTO news (title_vi, category_vi, excerpt_vi, full_content_vi, title_en, category_en, excerpt_en, full_content_en, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssssss", $title_vi, $category_vi, $excerpt_vi, $full_content_vi, $title_en, $category_en, $excerpt_en, $full_content_en, $image_url);
+        $stmt = $conn->prepare("INSERT INTO news (title_vi, category_vi, excerpt_vi, full_content_vi, title_en, category_en, excerpt_en, full_content_en, image_url, is_featured) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssssss", $title_vi, $category_vi, $excerpt_vi, $full_content_vi, $title_en, $category_en, $excerpt_en, $full_content_en, $image_url, $is_featured);
     }
 
     $stmt->execute();

@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $check->get_result();
 
     if ($result->num_rows > 0) {
-        echo "Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác. <a href='login-register.html'>Thử lại</a>";
+        echo "Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác. <a href='login-register.php'>Thử lại</a>";
     } else {
         // Chèn dữ liệu vào bảng
         $stmt = $conn->prepare("INSERT INTO users (username, fullname, email, phone, birthday, password) VALUES (?, ?, ?, ?, ?, ?)");
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($stmt->execute()) {
             // Sửa lại link để trỏ về file mới
-            echo "Đăng ký thành công. <a href='login-register.html'>Đăng nhập ngay</a>";
+            echo "Đăng ký thành công. <a href='login-register.php'>Đăng nhập ngay</a>";
         } else {
             echo "Đã xảy ra lỗi: " . $stmt->error;
         }

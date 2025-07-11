@@ -55,6 +55,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     echo "Nếu email của bạn tồn tại trong hệ thống, một hướng dẫn khôi phục mật khẩu đã được gửi đi.";
-    echo "<br><a href='login-register.html'>Quay lại</a>";
+    echo "<br><a href='login-register.php'>Quay lại</a>";
 }
 ?>

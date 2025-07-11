@@ -31,7 +31,6 @@ body {
     align-items: flex-start;
     padding: 2.5rem 1.5rem;
     box-sizing: border-box;
-    min-height: calc(100vh - 80px);
 }
 
 .profile-dashboard {

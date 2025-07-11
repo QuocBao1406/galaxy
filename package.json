@@ -1,0 +1,24 @@
+{
+  "name": "galaxy",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuocBao1406/galaxy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/QuocBao1406/galaxy/issues"
+  },
+  "homepage": "https://github.com/QuocBao1406/galaxy#readme",
+  "description": "",
+  "dependencies": {
+    "socket.io": "^4.8.1"
+  }
+}

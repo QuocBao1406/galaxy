@@ -6,17 +6,29 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/galaxy/db.php';
 if (!isset($_SESSION['user_id'])) { die("Lỗi: Bạn phải đăng nhập."); }
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { die("Yêu cầu không hợp lệ."); }
 
+
+  
 $conn->begin_transaction();
 try {
     // 2. Lấy dữ liệu từ form
     $post_id = isset($_POST['post_id']) ? (int)$_POST['post_id'] : 0;
     $content = isset($_POST['content']) ? trim($_POST['content']) : '';
     $media_to_delete = isset($_POST['delete_media']) ? $_POST['delete_media'] : [];
+    $isGroupPost = isset($_GET['group']);
+    $postTableName ="";
+    $postMediaTableName="";
+    if($isGroupPost){
+        $postTableName = "group_posts";
+        $postMediaTableName = "post_group_media";
+    }else{
+        $postTableName = "posts";
+        $postMediaTableName = "post_media";
+    }
 
     if ($post_id === 0) { throw new Exception("ID bài viết không hợp lệ."); }
 
     // 3. Xác thực quyền sở hữu
-    $stmt_check = $conn->prepare("SELECT user_id FROM posts WHERE id = ?");
+    $stmt_check = $conn->prepare("SELECT user_id FROM $postTableName WHERE id = ?");
     $stmt_check->bind_param("i", $post_id);
     $stmt_check->execute();
     $post = $stmt_check->get_result()->fetch_assoc();
@@ -26,7 +38,7 @@ try {
     $stmt_check->close();
 
     // 4. Cập nhật nội dung bài viết
-    $stmt_update_content = $conn->prepare("UPDATE posts SET content = ? WHERE id = ?");
+    $stmt_update_content = $conn->prepare("UPDATE $postTableName SET content = ? WHERE id = ?");
     $stmt_update_content->bind_param("si", $content, $post_id);
     $stmt_update_content->execute();
     $stmt_update_content->close();
@@ -38,7 +50,7 @@ try {
         $types = str_repeat('i', count($media_to_delete));
 
         // Lấy đường dẫn file để xóa trên server
-        $stmt_get_paths = $conn->prepare("SELECT file_path FROM post_media WHERE id IN ($ids_placeholder)");
+        $stmt_get_paths = $conn->prepare("SELECT file_path FROM $postMediaTableName WHERE id IN ($ids_placeholder)");
         $stmt_get_paths->bind_param($types, ...$media_to_delete);
         $stmt_get_paths->execute();
         $paths_result = $stmt_get_paths->get_result();
@@ -51,7 +63,7 @@ try {
         $stmt_get_paths->close();
 
         // Xóa bản ghi media trong CSDL
-        $stmt_delete_media = $conn->prepare("DELETE FROM post_media WHERE id IN ($ids_placeholder)");
+        $stmt_delete_media = $conn->prepare("DELETE FROM $postMediaTableName WHERE id IN ($ids_placeholder)");
         $stmt_delete_media->bind_param($types, ...$media_to_delete);
         $stmt_delete_media->execute();
         $stmt_delete_media->close();
@@ -89,7 +101,7 @@ try {
                     if (move_uploaded_file($file_tmp_path, $destination_path)) {
                         $file_path_db = '/galaxy/uploads/' . $sub_dir . $new_file_name;
                         
-                        $stmt_media = $conn->prepare("INSERT INTO post_media (post_id, file_path, media_type) VALUES (?, ?, ?)");
+                        $stmt_media = $conn->prepare("INSERT INTO $postMediaTableName (post_id, file_path, media_type) VALUES (?, ?, ?)");
                         $stmt_media->bind_param("iss", $post_id, $file_path_db, $media_type);
                         $stmt_media->execute();
                         $stmt_media->close();
@@ -101,7 +113,7 @@ try {
 
     // 7. Hoàn tất và chuyển hướng
     $conn->commit();
-    header("Location: post_details.php?id=" . $post_id . "&status=updated");
+    header("Location: post_group_detail.php?id=" . $post_id . "&status=updated");
     exit();
 
 } catch (Exception $e) {

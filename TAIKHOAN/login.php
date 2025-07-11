@@ -1,7 +1,7 @@
 <?php
 session_start();
 // Đường dẫn này đúng vì db.php ở thư mục cha (galaxy)
-include '../db.php'; 
+include $_SERVER['DOCUMENT_ROOT'] . '/galaxy/db.php'; 
 
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -26,10 +26,10 @@ if ($result->num_rows === 1) {
 
         if ($user['role'] === 'admin') {
             // SỬA LẠI ĐƯỜNG DẪN: đi ra khỏi thư mục TAIKHOAN rồi mới vào admin
-            header("Location: ../admin/index.php"); 
+            header("Location: /galaxy/admin/index.php"); 
         } else {
             // SỬA LẠI ĐƯỜNG DẪN: đi ra khỏi thư mục TAIKHOAN để về trang chủ
-            header("Location: ../trangchu.php"); 
+            header("Location: /galaxy/pages/trangchu.php"); 
         }
         exit();
     }

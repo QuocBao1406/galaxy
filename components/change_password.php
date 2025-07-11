@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'db.php'; // Kết nối CSDL
+require_once $_SERVER['DOCUMENT_ROOT'] . '/galaxy/db.php'; // Kết nối CSDL
 
 // Hàm để gửi phản hồi JSON và kết thúc script
 function send_json_response($success, $message) {

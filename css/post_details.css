@@ -35,3 +35,11 @@
             to { background-color: transparent; }
         }
         .comment-container:target { animation: highlight-comment 2s ease-out; border-radius: 10px; }
+        .link-trangcanhan{
+                color: #e4e6eb;
+                text-decoration: none;
+                cursor:  url('/galaxy/cursor.cur'),  auto !important;
+        }
+         .link-trangcanhan:hover{
+                color:#b0b3b8;
+        }

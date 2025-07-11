@@ -13,11 +13,26 @@ if (!isset($_SESSION['user_id'])) {
 $input = json_decode(file_get_contents('php://input'), true);
 $post_id = isset($input['post_id']) ? (int)$input['post_id'] : 0;
 $reaction_type = isset($input['reaction_type']) ? $input['reaction_type'] : '';
+$context = $input['context'] ?? null;
 $user_id = $_SESSION['user_id'];
 
-if ($post_id === 0 || empty($reaction_type)) {
+if ($post_id === 0 || empty($reaction_type) || !$context) {
     echo json_encode(['success' => false, 'message' => 'Dữ liệu không hợp lệ.']);
     exit();
+}
+
+$tableName = '';
+switch ($context) {
+    case 'comunity':
+        $tableName = 'reactions'; // Tên bảng reaction cho bài đăng ngoài group
+        break;
+    case 'group':
+        $tableName = 'group_reaction'; // Tên bảng reaction cho bài đăng trong group
+        break;
+    default:
+        http_response_code(400);
+        echo json_encode(['status' => 'error', 'message' => 'Invalid reaction context.']);
+        exit();
 }
 
 // --- XỬ LÝ DATABASE ---
