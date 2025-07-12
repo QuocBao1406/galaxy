@@ -19,6 +19,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/galaxy/db.php';
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/galaxy/css/header.css">
     <link rel="stylesheet" href="/galaxy/css/vutru.css">
+    <link rel="icon" type="image/ong" href="/galaxy/images-icon/logo.png">
+    <link rel="stylesheet" href="/galaxy/css/footer.css">
 </head>
 <body>
      <header id="head"> 

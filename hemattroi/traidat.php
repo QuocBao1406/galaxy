@@ -16,7 +16,8 @@ $loggedIn = isset($_SESSION['username']);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap&subset=vietnamese" rel="stylesheet">
-
+    <link rel="icon" type="image/ong" href="/galaxy/images-icon/logo.png">
+    <link rel="stylesheet" href="/galaxy/css/footer.css">
     <style>
         /* CSS CHO NỘI DUNG TRANG TRÁI ĐẤT */
         body {

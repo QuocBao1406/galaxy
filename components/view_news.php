@@ -70,6 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_comment'])) {
     <title><?= htmlspecialchars($news['title']) ?></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/galaxy/images-icon/logo.png">
+    <link rel="stylesheet" href="/galaxy/css/footer.css">
    <style>
         body { background-color: #0a0f1f; color: #e0e0e0; font-family: 'Lato', sans-serif;  cursor:  url('/galaxy/cursor.cur'),  auto !important;}
         .article-header { border-bottom: 1px solid #334155; }
@@ -115,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_comment'])) {
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="mb-4">
-                    <a href="tintuc.php" class="back-link">&laquo; <?= t('tintuc-6') ?></a>
+                    <a href="/galaxy/pages/tintuc.php" class="back-link">&laquo; <?= t('tintuc-6') ?></a>
                 </div>
 
                 <article>
@@ -237,6 +239,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_comment'])) {
                     </div>
                 </div>
         </div>
+    </main>
+
+    <main class="sun-content-section">
+        <?php
+            // 1. Xác định đường dẫn đến tệp nội dung dựa trên ngôn ngữ hiện tại
+            $content_file = $_SERVER['DOCUMENT_ROOT'] . "/galaxy/content/footer_{$current_lang}.html";
+
+            // 2. Kiểm tra tệp có tồn tại không và đọc toàn bộ nội dung của nó
+            if (file_exists($content_file)) {
+                echo file_get_contents($content_file);
+            } else {
+                echo "Nội dung không có sẵn cho ngôn ngữ này.";
+            }
+        ?>
     </main>
 </body>
 </html>

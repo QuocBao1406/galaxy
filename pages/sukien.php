@@ -54,6 +54,8 @@ $result = $stmt->get_result();
     <link rel="stylesheet" href="/galaxy/css/header.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/galaxy/css/sukien.css">
+    <link rel="icon" type="image/ong" href="/galaxy/images-icon/logo.png">
+    <link rel="stylesheet" href="/galaxy/css/footer.css">
 </head>
 <body>
     <?php // Bạn có thể include header chung của trang public ở đây nếu có ?>

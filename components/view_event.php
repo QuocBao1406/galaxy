@@ -6,8 +6,9 @@ session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/galaxy/languages/lang.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/galaxy/db.php';
 
-$event_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-if ($event_id === 0) die("Sự kiện không hợp lệ.");
+$event_id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+if ($event_id === 0)
+    die("Sự kiện không hợp lệ.");
 
 // 2. Xác định các cột ngôn ngữ sẽ lấy từ database
 $title_col = ($current_lang == 'en') ? 'title_en' : 'title_vi';
@@ -21,36 +22,92 @@ $stmt->bind_param("i", $event_id);
 
 $stmt->execute();
 $result = $stmt->get_result();
-if ($result->num_rows === 0) die("Không tìm thấy sự kiện.");
+if ($result->num_rows === 0)
+    die("Không tìm thấy sự kiện.");
 $event = $result->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="<?= $current_lang; // Cập nhật lang cho thẻ html ?>">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($event['title']) ?></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/ong" href="/galaxy/images-icon/logo.png">
+    <link rel="stylesheet" href="/galaxy/css/footer.css">
     <style>
-        body { background-color: #0a0f1f; color: #e0e0e0; font-family: 'Lato', sans-serif;  cursor:  url('/galaxy/cursor.cur'),  auto !important;}
-        .article-header { border-bottom: 1px solid #4a5568; }
-        .article-title { font-family: 'Merriweather', serif; font-weight: 700; color: #fff; }
-        .featured-image { width: 100%; max-height: 500px; object-fit: cover; margin-bottom: 30px; border-radius: 0.5rem; }
-        .article-content { font-size: 1.1rem; line-height: 1.9; color: #cbd5e1; }
-        .article-content img { max-width: 100%; height: auto; border-radius: 0.5rem; margin: 25px 0; }
-        .article-content h2, .article-content h3 { font-family: 'Merriweather', serif; color: #fbbf24; margin-top: 2rem; }
-        .back-link { color: #f59e0b; text-decoration: none; font-weight: bold; margin: 0px; }
-        .back-link:hover { color: #fef3c7; }
-        .event-date-badge { font-size: 1.1rem; }
+        body {
+            background-color: #0a0f1f;
+            color: #e0e0e0;
+            font-family: 'Lato', sans-serif;
+            cursor: url('/galaxy/cursor.cur'), auto !important;
+        }
+
+        .article-header {
+            border-bottom: 1px solid #4a5568;
+        }
+
+        .article-title {
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .featured-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            margin-bottom: 30px;
+            border-radius: 0.5rem;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin: 25px 0;
+        }
+
+        .article-content h2,
+        .article-content h3 {
+            font-family: 'Merriweather', serif;
+            color: #fbbf24;
+            margin-top: 2rem;
+        }
+
+        .back-link {
+            color: #f59e0b;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0px;
+        }
+
+        .back-link:hover {
+            color: #fef3c7;
+        }
+
+        .event-date-badge {
+            font-size: 1.1rem;
+        }
     </style>
     <link rel="stylesheet" href="/galaxy/css/header.css">
 </head>
+
 <body>
     <header id="head">
-    <div class="logo-container">
-        <img src="/galaxy/images-icon/logo3.png" alt="logonhom" class="logo-overlay">
-    </div>
+        <div class="logo-container">
+            <img src="/galaxy/images-icon/logo3.png" alt="logonhom" class="logo-overlay">
+        </div>
         <div id="menuhead">
             <?php include $_SERVER['DOCUMENT_ROOT'] . '/galaxy/components/nav.php'; ?>
         </div>
@@ -62,19 +119,20 @@ $event = $result->fetch_assoc();
                 <div class="mb-4">
                     <a href="/galaxy/pages/sukien.php" class="back-link">&laquo; <?= t('sukien-7') ?></a>
                 </div>
-                
+
                 <article>
                     <header class="article-header mb-4 pb-3">
                         <h1 class="article-title display-4"><?= htmlspecialchars($event['title']) ?></h1>
                         <p class="badge badge-warning p-2 event-date-badge">
-                           <?= t('sukien-8') ?>: <?= date("d/m/Y", strtotime($event['event_date'])) ?>
+                            <?= t('sukien-8') ?>: <?= date("d/m/Y", strtotime($event['event_date'])) ?>
                         </p>
                     </header>
-                    
+
                     <?php if (!empty($event['image_url'])): ?>
-                        <img src="<?= htmlspecialchars($event['image_url']) ?>" alt="<?= htmlspecialchars($event['title']) ?>" class="featured-image">
+                        <img src="<?= htmlspecialchars($event['image_url']) ?>"
+                            alt="<?= htmlspecialchars($event['title']) ?>" class="featured-image">
                     <?php endif; ?>
-                    
+
                     <div class="article-content mt-4">
                         <?php echo $event['content']; // In ra nội dung HTML từ trình soạn thảo ?>
                     </div>
@@ -82,6 +140,18 @@ $event = $result->fetch_assoc();
             </div>
         </div>
     </main>
-    <?php // Include footer chung ?>
+
+    <?php
+    // 1. Xác định đường dẫn đến tệp nội dung dựa trên ngôn ngữ hiện tại
+    $content_file = $_SERVER['DOCUMENT_ROOT'] . "/galaxy/content/footer_{$current_lang}.html";
+
+    // 2. Kiểm tra tệp có tồn tại không và đọc toàn bộ nội dung của nó
+    if (file_exists($content_file)) {
+        echo file_get_contents($content_file);
+    } else {
+        echo "Nội dung không có sẵn cho ngôn ngữ này.";
+    }
+    ?>
 </body>
+
 </html>

@@ -13,6 +13,8 @@ $loggedIn = isset($_SESSION['username']);
   
   <link rel="stylesheet" href="/galaxy/css/vechungtoi.css">
   <link rel="stylesheet" href="/galaxy/css/header.css">
+  <link rel="icon" type="image/ong" href="/galaxy/images-icon/logo.png">
+  <link rel="stylesheet" href="/galaxy/css/footer.css">
   <style>
     body{
      margin: 0;
@@ -33,6 +35,20 @@ $loggedIn = isset($_SESSION['username']);
         <?php
             // 1. Xác định đường dẫn đến tệp nội dung dựa trên ngôn ngữ hiện tại
             $content_file = $_SERVER['DOCUMENT_ROOT'] . "/galaxy/content/vechungtoi_{$current_lang}.html";
+
+            // 2. Kiểm tra tệp có tồn tại không và đọc toàn bộ nội dung của nó
+            if (file_exists($content_file)) {
+                echo file_get_contents($content_file);
+            } else {
+                echo "Nội dung không có sẵn cho ngôn ngữ này.";
+            }
+        ?>
+    </main>
+
+    <main class="sun-content-section">
+        <?php
+            // 1. Xác định đường dẫn đến tệp nội dung dựa trên ngôn ngữ hiện tại
+            $content_file = $_SERVER['DOCUMENT_ROOT'] . "/galaxy/content/footer_{$current_lang}.html";
 
             // 2. Kiểm tra tệp có tồn tại không và đọc toàn bộ nội dung của nó
             if (file_exists($content_file)) {

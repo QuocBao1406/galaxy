@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(form);
             if(submitButton) submitButton.disabled = true;
 
-            fetch('submit_comment.php', { method: 'POST', body: formData })
+            fetch('/galaxy/components/submit_comment.php', { method: 'POST', body: formData })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {

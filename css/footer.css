@@ -1,0 +1,103 @@
+.footer {
+    background-color: rgb(0,0,0, 0.6);
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    width: 100%;
+}
+
+.footer-members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.member {
+    min-width: 180px;
+}
+
+.member-name {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.member-id {
+    margin-bottom: 10px;
+}
+
+.member-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    font-size: 18px;
+}
+
+.footer-info {
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+    padding: 0 10px;
+}
+
+.logo-container-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.vku-logo {
+    max-width: 10vw;
+    height: auto;
+    transform: scale(4);
+}
+
+/* ========= Responsive ========= */
+@media screen and (max-width: 768px) {
+    .footer-members {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .member {
+        min-width: auto;
+    }
+
+    .logo-container {
+        margin-top: 25px;
+    }
+
+    .vku-logo {
+        max-width: 120px;
+        transform: scale(3.5);
+    }
+
+    .footer-info {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .footer {
+        padding: 30px 10px;
+    }
+
+    .footer-members {
+        gap: 15px;
+    }
+
+    .member-icons {
+        font-size: 16px;
+    }
+
+    .footer-info {
+        font-size: 12px;
+    }
+
+    .vku-logo {
+        max-width: 100px;
+    }
+}

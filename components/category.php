@@ -24,7 +24,7 @@ while ($row = $category_result->fetch_assoc()) {
 // 2. Nhận tham số GET
 $search_term = isset($_GET['search']) ? trim($_GET['search']) : '';
 $cat = isset($_GET['cat']) ? trim($_GET['cat']) : '';
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $limit = 6; // Số bài viết mỗi trang
 $offset = ($page - 1) * $limit;
 
@@ -109,24 +109,29 @@ $latest_news = $result_latest->fetch_all(MYSQLI_ASSOC);
 
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tin Tức & Khám Phá Vũ Trụ</title>
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="/galaxy/css/header.css">
     <link rel="stylesheet" href="/galaxy/css/tintuc.css">
+    <link rel="stylesheet" href="/galaxy/css/footer.css">
 
+    <link rel="icon" type="image/ong" href="/galaxy/images-icon/logo.png">
 </head>
+
 <body>
-    <header id="head"> 
+    <header id="head">
         <div class="logo-container">
             <img src="/galaxy/images-icon/logo3.png" alt="logonhom" class="logo-overlay">
         </div>
@@ -142,7 +147,8 @@ $latest_news = $result_latest->fetch_all(MYSQLI_ASSOC);
                 <form action="category.php" method="GET" class="search-form">
                     <input type="hidden" name="cat" value="<?= htmlspecialchars($_GET['cat'] ?? '') ?>">
                     <div class="input-group">
-                        <input type="text" name="search" class="form-control form-control-lg" placeholder="<?= t('tintuc-1') ?>" value="<?= htmlspecialchars($search_term) ?>">
+                        <input type="text" name="search" class="form-control form-control-lg"
+                            placeholder="<?= t('tintuc-1') ?>" value="<?= htmlspecialchars($search_term) ?>">
                         <div class="input-group-append">
                             <button class="btn btn-lg px-4" type="submit"><?= t('tintuc-2') ?></button>
                         </div>
@@ -153,17 +159,17 @@ $latest_news = $result_latest->fetch_all(MYSQLI_ASSOC);
 
         <div class="other-news">
             <div class="row">
-                  <?php
-                    // Nhóm tin tức theo chuyên mục (category)
-                    $grouped_news = [];
-                    foreach ($all_news as $news) {
-                        $cat = $news['category'];
-                        if (!isset($grouped_news[$cat])) {
-                            $grouped_news[$cat] = [];
-                        }
-                        $grouped_news[$cat][] = $news;
+                <?php
+                // Nhóm tin tức theo chuyên mục (category)
+                $grouped_news = [];
+                foreach ($all_news as $news) {
+                    $cat = $news['category'];
+                    if (!isset($grouped_news[$cat])) {
+                        $grouped_news[$cat] = [];
                     }
-                    ?>
+                    $grouped_news[$cat][] = $news;
+                }
+                ?>
                 <div class="col-md-8">
                     <?php
                     // Lấy category từ URL
@@ -172,15 +178,16 @@ $latest_news = $result_latest->fetch_all(MYSQLI_ASSOC);
                     <nav aria-label="breadcrumb" class="mb-4">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="tintuc.php"  class="text-decoration-none"><?= t('tintuc') ?></a>
+                                <a href="/galaxy/pages/tintuc.php" class="text-decoration-none"><?= t('tintuc') ?></a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="category.php?cat=<?= urlencode($cat) ?>"  class="text-decoration-none"><?= htmlspecialchars($cat) ?></a>
+                                <a href="category.php?cat=<?= urlencode($cat) ?>"
+                                    class="text-decoration-none"><?= htmlspecialchars($cat) ?></a>
                             </li>
                         </ol>
                     </nav>
 
-                    <?php if(!empty($search_term)): ?>
+                    <?php if (!empty($search_term)): ?>
                         <h3 class="text-white mb-4"><?= t('tintuc-3') ?>"<?= htmlspecialchars($search_term) ?>"</h3>
                     <?php endif; ?>
 
@@ -191,21 +198,24 @@ $latest_news = $result_latest->fetch_all(MYSQLI_ASSOC);
                                 <?php foreach (array_slice($news_list, 0, 4) as $row): ?>
                                     <div class="col-md-12 col-lg-6 mb-4" data-aos="fade-up" data-aos-duration="800">
                                         <div class="card news-card h-100">
-                                            <img src="<?= htmlspecialchars($row['image_url'] ?: 'assets/images/default-news.jpg') ?>" class="card-img-top news-card-img" alt="<?= htmlspecialchars($row['title']) ?>">
-                                                <div class="card-body d-flex flex-column">
-                                                    <h5 class="card-title"><?= htmlspecialchars($row['title']) ?></h5>
-                                                    <p class="card-text small text-muted"><?= htmlspecialchars($row['category']) ?> - <?= date("d/m/Y", strtotime($row['created_at'])) ?></p>
-                                                    <p class="card-text flex-grow-1"><?= htmlspecialchars($row['excerpt']) ?></p>
-                                                    <a href="view_news.php?id=<?= $row['id'] ?>" class="btn btn-custom mt-auto align-self-start"><?= t('tintuc-4') ?></a>
-                                                </div>
+                                            <img src="<?= htmlspecialchars($row['image_url'] ?: 'assets/images/default-news.jpg') ?>"
+                                                class="card-img-top news-card-img" alt="<?= htmlspecialchars($row['title']) ?>">
+                                            <div class="card-body d-flex flex-column">
+                                                <h5 class="card-title"><?= htmlspecialchars($row['title']) ?></h5>
+                                                <p class="card-text small text-muted"><?= htmlspecialchars($row['category']) ?>
+                                                    - <?= date("d/m/Y", strtotime($row['created_at'])) ?></p>
+                                                <p class="card-text flex-grow-1"><?= htmlspecialchars($row['excerpt']) ?></p>
+                                                <a href="view_news.php?id=<?= $row['id'] ?>"
+                                                    class="btn btn-custom mt-auto align-self-start"><?= t('tintuc-4') ?></a>
                                             </div>
                                         </div>
-                                    <?php 
+                                    </div>
+                                <?php
                                 endforeach; ?>
                             </div>
                         </div>
                     <?php endforeach; ?>
-                   <?php if ($total_pages > 1): ?>
+                    <?php if ($total_pages > 1): ?>
                         <nav class="mt-4">
                             <ul class="pagination justify-content-center">
                                 <?php
@@ -246,17 +256,17 @@ $latest_news = $result_latest->fetch_all(MYSQLI_ASSOC);
 
 
                 </div>
-                 <!-- Cột phải: Tin đặc biệt -->
+                <!-- Cột phải: Tin đặc biệt -->
                 <div class="col-md-4">
                     <!-- Tin nhiều lượt xem -->
                     <h5 class="mt-5 pt-4 mb-3 section-title">🔥 Tin nhiều lượt xem</h5>
                     <?php foreach ($popular_news as $news): ?>
                         <div class="d-flex mb-3 border-bottom pb-3 align-items-center">
                             <img src="<?= htmlspecialchars($news['image_url'] ?: 'assets/images/default-news.jpg') ?>"
-                                class="me-3 rounded news-thumbnail"
-                                alt="<?= htmlspecialchars($news['title']) ?>">
+                                class="me-3 rounded news-thumbnail" alt="<?= htmlspecialchars($news['title']) ?>">
                             <div>
-                                <a href="view_news.php?id=<?= $news['id'] ?>" class="news-link fw-bold d-block text-decoration-none" ><?= htmlspecialchars($news['title']) ?></a>
+                                <a href="view_news.php?id=<?= $news['id'] ?>"
+                                    class="news-link fw-bold d-block text-decoration-none"><?= htmlspecialchars($news['title']) ?></a>
                                 <small class="luotxem"><?= $news['views'] ?> lượt xem</small>
                             </div>
                         </div>
@@ -266,17 +276,17 @@ $latest_news = $result_latest->fetch_all(MYSQLI_ASSOC);
                     <!-- Tin mới nhất -->
                     <h5 class="mt-4 mb-3 section-title">🕒 Tin mới nhất</h5>
                     <?php foreach ($latest_news as $news): ?>
-                    <div class="d-flex mb-3 border-bottom pb-2 align-items-center">
-                        <img src="<?= htmlspecialchars($news['image_url'] ?: 'assets/images/default-news.jpg') ?>"
-                                class="me-3 rounded news-thumbnail"
-                                alt="<?= htmlspecialchars($news['title']) ?>">
-                        <div>
-                        <a href="view_news.php?id=<?= $news['id'] ?>" class="news-link d-block text-decoration-none">
-                        <?= htmlspecialchars($news['title']) ?>
-                        </a>
-                        <small class="ngaydang"><?= date("d/m/Y", strtotime($news['created_at'])) ?></small>
+                        <div class="d-flex mb-3 border-bottom pb-2 align-items-center">
+                            <img src="<?= htmlspecialchars($news['image_url'] ?: 'assets/images/default-news.jpg') ?>"
+                                class="me-3 rounded news-thumbnail" alt="<?= htmlspecialchars($news['title']) ?>">
+                            <div>
+                                <a href="view_news.php?id=<?= $news['id'] ?>"
+                                    class="news-link d-block text-decoration-none">
+                                    <?= htmlspecialchars($news['title']) ?>
+                                </a>
+                                <small class="ngaydang"><?= date("d/m/Y", strtotime($news['created_at'])) ?></small>
+                            </div>
                         </div>
-                    </div>
                     <?php endforeach; ?>
 
                     <!-- Lọc theo ngày -->
@@ -285,12 +295,13 @@ $latest_news = $result_latest->fetch_all(MYSQLI_ASSOC);
                         <input type="date" name="date" class="form-control mb-2" required>
                         <button type="submit" class="btn btn-sm btn-outline-primary w-100">Xem tin</button>
                     </form>
-                    
-                      <!-- Hiện các thẻ category -->
-                     <h5 class="mt-4 mb-3 section-title"><?= t('tag-categoty') ?></h5>
+
+                    <!-- Hiện các thẻ category -->
+                    <h5 class="mt-4 mb-3 section-title"><?= t('tag-categoty') ?></h5>
                     <div class="mb-4">
                         <?php foreach ($categories as $cat): ?>
-                            <a href="category.php?cat=<?= urlencode($cat) ?>" class="btn btn-outline-secondary btn-sm mx-1 mb-2">
+                            <a href="category.php?cat=<?= urlencode($cat) ?>"
+                                class="btn btn-outline-secondary btn-sm mx-1 mb-2">
                                 <i class="fas fa-tag"></i> <?= htmlspecialchars($cat) ?>
                             </a>
                         <?php endforeach; ?>
@@ -300,11 +311,25 @@ $latest_news = $result_latest->fetch_all(MYSQLI_ASSOC);
         </div>
     </main>
 
+    <main class="sun-content-section">
+        <?php
+        // 1. Xác định đường dẫn đến tệp nội dung dựa trên ngôn ngữ hiện tại
+        $content_file = $_SERVER['DOCUMENT_ROOT'] . "/galaxy/content/footer_{$current_lang}.html";
+
+        // 2. Kiểm tra tệp có tồn tại không và đọc toàn bộ nội dung của nó
+        if (file_exists($content_file)) {
+            echo file_get_contents($content_file);
+        } else {
+            echo "Nội dung không có sẵn cho ngôn ngữ này.";
+        }
+        ?>
+    </main>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
+
     <script src="/galaxy/js/tintuc.js"></script>
 </body>

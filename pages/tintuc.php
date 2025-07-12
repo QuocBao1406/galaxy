@@ -88,6 +88,8 @@ $latest_news = $result_latest->fetch_all(MYSQLI_ASSOC);
 
     <link rel="stylesheet" href="/galaxy/css/header.css">
     <link rel="stylesheet" href="/galaxy/css/tintuc.css">
+    <link rel="icon" type="image/ong" href="/galaxy/images-icon/logo.png">
+    <link rel="stylesheet" href="/galaxy/css/footer.css">
 
 </head>
 <body>
@@ -239,6 +241,20 @@ $latest_news = $result_latest->fetch_all(MYSQLI_ASSOC);
                 </div>
             </div>
         </div>
+    </main>
+
+    <main class="sun-content-section">
+        <?php
+            // 1. Xác định đường dẫn đến tệp nội dung dựa trên ngôn ngữ hiện tại
+            $content_file = $_SERVER['DOCUMENT_ROOT'] . "/galaxy/content/footer_{$current_lang}.html";
+
+            // 2. Kiểm tra tệp có tồn tại không và đọc toàn bộ nội dung của nó
+            if (file_exists($content_file)) {
+                echo file_get_contents($content_file);
+            } else {
+                echo "Nội dung không có sẵn cho ngôn ngữ này.";
+            }
+        ?>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
